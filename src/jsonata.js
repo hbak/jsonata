@@ -14,6 +14,7 @@ var fn = require('./functions');
 var utils = require('./utils');
 var parser = require('./parser');
 var parseSignature = require('./signature');
+var deepmerge = require('deepmerge');
 
 /**
  * jsonata
@@ -1295,8 +1296,11 @@ var jsonata = (function() {
                             };
                         }
                         // merge the update
-                        for(var prop in update) {
-                            match[prop] = update[prop];
+                        // for(var prop in update) {
+                        //     match[prop] = update[prop];
+                        // }
+                        for (var prop in update) {
+                          match[prop] = deepmerge(match[prop], update[prop]);
                         }
                     }
 
@@ -1882,6 +1886,7 @@ var jsonata = (function() {
     staticFrame.bind('exists', defineFunction(fn.exists, '<x:b>'));
     staticFrame.bind('spread', defineFunction(fn.spread, '<x-:a<o>>'));
     staticFrame.bind('merge', defineFunction(fn.merge, '<a<o>:o>'));
+    staticFrame.bind('deepmerge', defineFunction(fn.deepmerge, '<a<o>:o>'));
     staticFrame.bind('reverse', defineFunction(fn.reverse, '<a:a>'));
     staticFrame.bind('each', defineFunction(fn.each, '<o-f:a>'));
     staticFrame.bind('error', defineFunction(fn.error, '<s?:x>'));

@@ -5,6 +5,7 @@
  */
 
 var utils = require('./utils');
+var deepmerger = require('deepmerge');
 
 const functions = (() => {
     'use strict';
@@ -1774,6 +1775,22 @@ const functions = (() => {
     }
 
     /**
+     * Deeply merges an array of objects into a single object.  Duplicate properties are
+     * overridden by entries later in the array
+     * @param {*} arg - the objects to merge
+     * @returns {*} - the object
+     */
+    function deepmerge(arg) {
+        // undefined inputs always return undefined
+        if (typeof arg === 'undefined') {
+            return undefined;
+        }
+
+        var result = deepmerger.all(arg);
+        return result;
+    }
+
+    /**
      * Reverses the order of items in an array
      * @param {Array} arr - the array to reverse
      * @returns {Array} - the reversed array
@@ -2060,7 +2077,7 @@ const functions = (() => {
         formatNumber, formatBase, number, floor, ceil, round, abs, sqrt, power, random,
         boolean, not,
         map, zip, filter, single, foldLeft, sift,
-        keys, lookup, append, exists, spread, merge, reverse, each, error, assert, type, sort, shuffle, distinct,
+        keys, lookup, append, exists, spread, merge, deepmerge, reverse, each, error, assert, type, sort, shuffle, distinct,
         base64encode, base64decode,  encodeUrlComponent, encodeUrl, decodeUrlComponent, decodeUrl
     };
 })();
