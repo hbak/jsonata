@@ -3236,7 +3236,6 @@ const functions = (() => {
      * @returns {*} - the object
      */
     function merge(arg) {
-      console.debug('vvvv arg', arg);
         // undefined inputs always return undefined
         if (typeof arg === 'undefined') {
             return undefined;
@@ -3253,7 +3252,6 @@ const functions = (() => {
     }
 
     function deepmerge(arg) {
-      console.debug('vvvv arg', arg);
         // undefined inputs always return undefined
         if (typeof arg === 'undefined') {
             return undefined;
